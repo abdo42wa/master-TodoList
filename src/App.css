@@ -1,5 +1,43 @@
 .app {
   text-align: center;
+  background-color: black;
+  height: 100vh;
+  color: white;
+}
+
+.login-page{
+  display: grid;
+    place-items: center;
+    min-height: 70vh;
+    background-color: blueviolet;
+    border-radius: 20px;
+    box-shadow: 0 1px 10px 13px rgb(255 255 255 / 12%), 0 1px 3px rgb(255 255 255 / 12%);
+}
+.login-page  h1 {
+  align-items: center;
+  justify-content: center;
+  margin-top: -10%;
+  
+}
+.login-page   form {
+  text-align: start;
+}
+.login-page  form button{
+  margin-bottom: 20px;
+} 
+.bacground-image-login{
+  background-image: url('./images/undraw_Hacker_mindset_re_8a33.svg');
+  background-size: cover;
+  height: 156%;
+  transition: all 0.5s ease-in-out;
+}
+
+.bacground-image-login-hover{
+  background-image: url('./images/undraw_my_password_d6kg.svg');
+  background-size: cover;
+  background-position: center;
+  height: 156%;
+  transition: all 0.5s ease-in-out;
 }
 
 
