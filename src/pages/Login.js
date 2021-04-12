@@ -20,10 +20,10 @@ const Login = () => {
                  <CustomInput lable='Password' type='password' onFocus={() => sethoved(true)} onBlur={() => sethoved(false)} />
 
                  <CustomButton variant='dark' type="submit">LOGIN </CustomButton>
-                 <CustomButton variant='primary'>LOGIN using Google </CustomButton>
+                 <CustomButton variant='danger'>LOGIN using Google </CustomButton>
                 
                  
-                 <Link to='/regstration'>New user? Create an account</Link>
+                 <Link to='/register'>New user? Create an account</Link>
              </Form>
              </Col>
              <Col md={6} className='offset-md-1' >
