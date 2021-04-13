@@ -4,6 +4,9 @@
   height: 100vh;
   color: white;
 }
+nav{
+  background-color: black !important;
+}
 
 /* start login page */
 .login-page{
