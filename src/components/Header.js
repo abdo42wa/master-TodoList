@@ -1,5 +1,5 @@
 import React from 'react'
-import {Container, Nav,Navbar} from 'react-bootstrap'
+import {Container, Nav,Navbar,NavDropdown} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import {useSelector,useDispatch} from 'react-redux'
 import { userLogout } from '../redux/UserAction'
@@ -21,13 +21,15 @@ const Header = () => {
         <>
         <Navbar  variant="dark">
             <Container>
-            <Navbar.Brand href="#home">Master</Navbar.Brand>
+            <LinkContainer to='/'>
+            <Navbar.Brand >Master</Navbar.Brand>
+            </LinkContainer>
           <Nav className="ml-auto">
           <LinkContainer to='/'>
                 <Nav.Link>Home</Nav.Link>
           </LinkContainer>
 
-            {!curentuser &&    
+            {!curentuser ?(  
             <>
             <LinkContainer to='/login'>
                     <Nav.Link>Login</Nav.Link>
@@ -37,7 +39,17 @@ const Header = () => {
                     <Nav.Link>Register</Nav.Link>
           </LinkContainer>
           </>
+          ):(
+            <NavDropdown title={curentuser.displayName} id="basic-nav-dropdown">
+            <LinkContainer to='/create/task' >
+            <NavDropdown.Item>Create Task</NavDropdown.Item>
+            </LinkContainer>
+          <NavDropdown.Item href="#action/3.2">tasks</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.3">History</NavDropdown.Item>
+          </NavDropdown>
+          )
           }
+            
             
           <Nav.Link onClick={logout}>Lougout</Nav.Link>
             

@@ -1,45 +1,56 @@
 import React,{useEffect} from 'react'
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { ToastContainer} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Header from './components/Header';
 import {BrowserRouter,Route} from 'react-router-dom'
 import { Container } from 'react-bootstrap';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import {auth} from './firebase'
+import {auth,createUserProfileDocument} from './firebase'
 import { useDispatch } from 'react-redux';
 import { userLogin, userLogout } from './redux/UserAction';
+import HomePage from './pages/HomePage';
+import CreateTask from './pages/CreateTask';
+
 
 const App = () => {
   const dispatch = useDispatch(); 
   useEffect(()=>{
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
       if (user){
-        console.log('user======>', user)
-
-        dispatch(userLogin({
-          username: user.displayName,
-          email: user.email,
-          id: user.uid
-        }))
+        //console.log('user======>', user)
+        const userRef = await createUserProfileDocument(user);
+          userRef.onSnapshot(snapshot => {
+            dispatch(userLogin({
+              id: snapshot.id,
+              ...snapshot.data()
+            }))
+          })
       }else{
         dispatch(userLogout())
       }
+      
     })
 
     return () =>{
       unsubscribe ()
     };
-
+    
   },[dispatch])
   return (
   <div className='app'>
       <BrowserRouter>
         <Header />
-        <main className='py-3'>
+        <ToastContainer />
+        <main className=''>
         <Container>
+           
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
+            <Route path='/create/task' component={CreateTask} />
+            <Route path='/' component={HomePage} exact />
         </Container>
         </main>
     </BrowserRouter>
