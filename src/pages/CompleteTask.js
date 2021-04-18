@@ -3,20 +3,14 @@ import {Col } from 'react-bootstrap'
 import db from '../firebase'
 import {useSelector} from 'react-redux'
 import Todo from '../components/Todo'
-//import {TaskList} from '../redux/UserAction'
 
+const CompleteTask = () => {
 
-
-const Tasks = () => {
     const user = useSelector((state)=> state.user)
     const {curentuser} = user
-
-
     const [tasks,setTasks] = useState([]);
-
-
+    
     useEffect(() => {
-
         if(curentuser){
             db.collection('users').doc(curentuser.id).collection('tasks').orderBy('timestamp', 'desc').onSnapshot((snapshot) =>
             
@@ -36,12 +30,12 @@ const Tasks = () => {
 
     },[curentuser])
 
-    
     return (
         <div className='tasks-page mt-5'>
             
             <Col md={12} >
             {tasks.map((task)=> (
+                task.complete &&
                 <Todo title={task.title} complete={task.complete} id={task.id} description={task.description} key={task.id}/>
                 ))}
                 {tasks.length === 0 && <h1 className='not-tasks'>You have not tasks to show</h1>}
@@ -53,4 +47,4 @@ const Tasks = () => {
     )
 }
 
-export default Tasks
+export default CompleteTask

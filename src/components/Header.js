@@ -47,7 +47,9 @@ const Header = () => {
             <LinkContainer to='/tasks' >
           <NavDropdown.Item>tasks</NavDropdown.Item>
           </LinkContainer>
-          <NavDropdown.Item href="#action/3.3">History</NavDropdown.Item>
+          <LinkContainer to='/tasks/complete' >
+          <NavDropdown.Item >Completed tasks</NavDropdown.Item>
+          </LinkContainer>
           </NavDropdown>
           )
           }
