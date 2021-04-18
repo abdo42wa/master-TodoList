@@ -10,10 +10,22 @@ const Todo = ({title,description,complete,id}) => {
     const {curentuser} = user
     const [show, setShow] = useState(false);
 
+    const [userTitle, setUserTitle] = useState(title);
+    const [userDescription, setUserDescription] = useState(description);
+
     const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
+    const updateTask = () => {
+        if(curentuser){
+            db.collection('users').doc(curentuser.id).collection('tasks').doc(id).update({
+
+                title: userTitle,
+                description: userDescription
+            })
+            setShow(false)
+        }
+    }
 
     const handleStatus = () => {
         if(curentuser){
@@ -57,14 +69,14 @@ const Todo = ({title,description,complete,id}) => {
                     <Modal.Title>Edit Task</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <CustomInput lable='title' value={title} />
-                        <CustomInput lable='description' value={description} />
+                        <CustomInput lable='title'          value={userTitle}       onChange={(e) => setUserTitle(e.target.value)} />
+                        <CustomInput lable='description'    value={userDescription} onChange={(e) => setUserDescription(e.target.value)} />
                     </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={updateTask}>
                         Save Changes
                     </Button>
                     </Modal.Footer>
