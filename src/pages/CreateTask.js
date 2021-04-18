@@ -6,14 +6,18 @@ import {useSelector} from 'react-redux'
 import db from '../firebase'
 import firebase from 'firebase'
 import {toast} from 'react-toastify'
+//import {createTaskAction} from '../redux/UserAction'
+
 
 
 const CreateTask = ({history}) => {
+    
     const [title,setTitle] = useState('');
     const [description,setDescription] = useState('');
 
     const user = useSelector((state)=> state.user)
     const {curentuser} = user
+//    const dispatch = useDispatch()
 
     const handleTask = (e) => {
         e.preventDefault()
@@ -24,10 +28,13 @@ const CreateTask = ({history}) => {
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 complete: false
             })
+
+           
             setTitle('');
             setDescription('');
             toast.success('You have created new task successful')
-            history.push('/tasks')
+            //history.push('/tasks')
+            
         } catch (error) {
             console.log(error)
         }

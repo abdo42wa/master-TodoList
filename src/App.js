@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { userLogin, userLogout } from './redux/UserAction';
 import HomePage from './pages/HomePage';
 import CreateTask from './pages/CreateTask';
+import Tasks from './pages/Tasks';
 
 
 const App = () => {
@@ -50,6 +51,7 @@ const App = () => {
             <Route path='/login' component={Login} />
             <Route path='/register' component={Register} />
             <Route path='/create/task' component={CreateTask} />
+            <Route path='/tasks' component={Tasks} />
             <Route path='/' component={HomePage} exact />
         </Container>
         </main>
